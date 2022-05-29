@@ -1,0 +1,8 @@
+# depslib dependency file v1.0
+1637697076 source:c:\users\e4i\desktop\pe\project\mainproject.cpp
+	<iostream>
+	<string.h>
+	<stdio.h>
+	<stdlib.h>
+	<fstream>
+
