@@ -1,65 +1,26 @@
 #include <iostream>
 #include "CustomScopedArray.h"
 
-using std::cout;
-using std::endl;
-using std::string;
 
-CustomScopedArray::CustomScopedArray(int size)
-{
-    /* Out of bounds check */
-    if (size < 0) { exit(1); }
-
-    this->size = size;
-    arr = new int[size];
-    cout << "Custom array constructed\n";
-}
-
-CustomScopedArray::~CustomScopedArray()
-{
-    delete[]arr;
-    cout << "Custom array destructed\n";
-}
-
-int& CustomScopedArray::SetAt(int index)
-{
-    /* Out of bounds check */
-    if ((index >= this->size) || (index < 0))
-    {
-        exit(1);
-    }
-
-    return arr[index];
-}
-
-int CustomScopedArray::GetAt(int index)
-{
-    /* Out of bounds check */
-    if ((index >= this->size) || (index < 0))
-    {
-        exit(1);
-    }
-
-    return arr[index];
-}
-
-int CustomScopedArray::GetSize()
-{
-    return this->size;
-}
-
-void InitArray(CustomScopedArray& arr);
-void PrintArray(CustomScopedArray& arr);
+template <typename T>
+void InitArray(CustomScopedArray<T>& arr);
+template <typename T>
+void PrintArray(CustomScopedArray<T>& arr);
 
 int main()
 {
     {
-        CustomScopedArray arr(10);
+        CustomScopedArray<string> arr(5);
 
         cout << arr.GetSize() << endl;
 
         /* Init the whole array */
-        InitArray(arr);
+        // InitArray(arr);
+        arr.SetAt(4) = "kef";
+        arr.SetAt(3) = "emo";
+        arr.SetAt(2) = "e";
+        arr.SetAt(1) = "mnogo";
+        arr.SetAt(0) = "gotin";
 
         /* Print the whole array */
         PrintArray(arr);
@@ -70,7 +31,8 @@ int main()
     return 0;
 }
 
-void InitArray(CustomScopedArray& arr)
+template <typename T>
+void InitArray(CustomScopedArray<T>& arr)
 {
     for (int i = 0; i < arr.GetSize(); i++)
     {
@@ -78,7 +40,8 @@ void InitArray(CustomScopedArray& arr)
     }
 }
 
-void PrintArray(CustomScopedArray& arr)
+template <typename T>
+void PrintArray(CustomScopedArray<T>& arr)
 {
     for (int i = 0; i < arr.GetSize(); i++)
     {
