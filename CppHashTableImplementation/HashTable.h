@@ -3,6 +3,7 @@
 
 #include <iostream>
 #include <list>
+#include "SinglyLinkedList.h"
 
 using std::cout;
 using std::endl;
@@ -16,7 +17,7 @@ private:
 	int numberOfBuckets;
 
 	/* The actual table */
-	list<string>* table;
+	List* table;
 
 public:
 	/* Forbid the parameterless constructor */
@@ -29,7 +30,7 @@ public:
 	HashTable(int numberOfBuckets) : numberOfBuckets(numberOfBuckets)
 	{
 		/* Allocate memory for the table */
-		table = new list<string>[numberOfBuckets];
+		table = new List[numberOfBuckets];
 
 		/* Set the size of the table */
 		this->numberOfBuckets = numberOfBuckets;
@@ -54,7 +55,7 @@ public:
 		int calcBucket = key % this->numberOfBuckets;
 
 		/* Insert the value in the table */
-		table[calcBucket].push_back(value);
+		table[calcBucket].Append(value);
 	}
 
 	/* Print the whole table */
@@ -63,10 +64,11 @@ public:
 		for (int i = 0; i < this->numberOfBuckets; i++) 
 		{
 			cout << "| Bucket " << i << " | ";
-			for (string current : table[i]) {
+			/*for (string current : table[i]) {
 				cout << "-> | " << current << " | ";
-			}
-			cout << endl;
+			}*/
+			cout << " -> ";
+			table[i].PrintList();
 		}
 	}
 
